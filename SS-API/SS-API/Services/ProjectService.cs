@@ -12,11 +12,11 @@ namespace SS_API.Services
 {
     public interface IProjectService
     {
-        Task<Project> GetById(int id);
+        Task<Project> GetByIdProject(int id);
         Task<List<Project>> GetByCourse(int courseId);
-        Task Update(Project model);
-        Task Delete(int id);
-        Task Create(Project model);
+        Task UpdateProject(Project model);
+        Task DeleteProject(int id);
+        Task CreateProject(Project model);
     }
 
     public class ProjectService : IProjectService
@@ -27,9 +27,8 @@ namespace SS_API.Services
         {
             Db = db;
         }
-        public async Task<Project> GetById(int id)
+        public async Task<Project> GetByIdProject(int id)
         {
-            //Método retorna objeto através de um ID informado
             try
             {
                 Project project = await Db.Set<Project>()
@@ -46,7 +45,6 @@ namespace SS_API.Services
 
         public async Task<List<Project>> GetByCourse(int courseId)
         {
-            //Método retorna uma Lista de objetos cujo o CourseId seja igual ao parâmetro informado, ordenando por nome de Projeto
             try
             {
                 IQueryable<Project> query = Db.Set<Project>().AsQueryable();
@@ -61,9 +59,8 @@ namespace SS_API.Services
             }
         }
 
-        public async Task Update(Project model)
+        public async Task UpdateProject(Project model)
         {
-            //Método para atualizar um registro de acordo com o objeto informado
             try
             {
                 Db.Set<Project>().Update(model);
@@ -75,9 +72,8 @@ namespace SS_API.Services
             }
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteProject(int id)
         {
-            //Método realiza a exclusão do Projeto de acordo com o ID informaodo
             try
             {
                 Project project = await Db.Set<Project>()
@@ -92,13 +88,13 @@ namespace SS_API.Services
             }
         }
 
-        public async Task Create(Project model)
+        public async Task CreateProject(Project model)
         {
-            //Método cria um registro de acordo com o objeto informado
             try
             {
                 Db.Set<Project>().Add(model);
                 await Db.SaveChangesAsync();
+                //return (nameof(GetByIdProject), new { id = model.Id }, model);
             }
             catch (Exception ex)
             {

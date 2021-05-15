@@ -15,5 +15,6 @@ namespace SS_API.Data
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Project> Projects { get; set; }
+
     }
 }

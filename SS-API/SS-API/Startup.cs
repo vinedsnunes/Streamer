@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
+using AutoMapper;
 using SS_API.Data;
-
+using SS_API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +41,12 @@ namespace SS_API
                 x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddMvc();
-
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<IProjectService, ProjectService>();
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup).Assembly);
             services.AddSwaggerGen(c =>
+            
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SS_API", Version = "v1" });
             });

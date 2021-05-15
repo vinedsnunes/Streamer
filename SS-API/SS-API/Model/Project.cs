@@ -17,6 +17,5 @@ namespace SS_API.Model
         public string WhatWillWeDo { get; set; }
         public ProjectStatus ProjectStatus { get; set; }
         public int CourseId { get; set; }
-
     }
 }

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using SS_API.Data;
 using SS_API.Model;
-
+using SS_API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,68 +15,92 @@ namespace SS_API.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-        private readonly StreamerContext _context;
+        private readonly ICourseService _courseService;
+        private readonly IMapper Mapper;
 
-        public CourseController(StreamerContext context)
+        public CourseController(ICourseService courseService, IMapper mapper)
         {
-            _context = context;
+            _courseService = courseService;
+            Mapper = mapper;
         }
 
-        // GET
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
+        [HttpGet("GetAllCourses")]
+        public async Task<IActionResult> GetAllCourses()
         {
-            return await _context.Courses.ToListAsync();
-        }
-
-        // POST
-        [HttpPost]
-        public async Task<ActionResult<Course>> PostCouse(Course course)
-        {
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
-        }
-
-        // PUT
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
-        {
-            if (id != course.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(course).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                List<Course> result = await _courseService.GetAllCourses();
+                List<Course> model = Mapper.Map<List<Course>>(result);
+
+                return Ok(model);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw new Exception("Error: ", ex);
             }
-
-            return NoContent();
         }
 
-        // DELETE
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet("GetByCourseId/{id}")]
+        public async Task<IActionResult> GetByCourseId(int id)
         {
+            try
+            {
+                Course result = await _courseService.GetByCourseId(id);
+                Course model = Mapper.Map<Course>(result);
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: ", ex);
+            }
         }
 
-        private bool CourseExists(int id)
+        [HttpPost("CreateCourse")]
+        public async Task<IActionResult> CreateCourse([FromBody] Course model)
         {
-            return _context.Courses.Any(e => e.Id == id);
+            try
+            {
+                Course course = Mapper.Map<Course>(model);
+                await _courseService.CreateCourse(course);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: ", ex);
+            }
+        }
+
+        [HttpPut("UpdateCourse")]
+        public async Task<IActionResult> UpdateCourse([FromBody] Course model)
+        {
+            try
+            {
+                Course course = await _courseService.GetByCourseId(model.Id);
+                course = Mapper.Map<Course>(model);
+
+                await _courseService.UpdateCourse(course);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: ", ex);
+            }
+        }
+
+        [HttpDelete("DeleteCourse/{id}")]
+        public void DeleteCourse(int id)
+        {
+            try
+            {
+                _courseService.DeleteCourse(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: ", ex);
+            }
         }
     }
 }

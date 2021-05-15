@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sabio\\Documents\\SS-API\\SS-API\\SS-API.csproj": {}
+    "C:\\Streamer\\SS-API\\SS-API\\SS-API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sabio\\Documents\\SS-API\\SS-API\\SS-API.csproj": {
+    "C:\\Streamer\\SS-API\\SS-API\\SS-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sabio\\Documents\\SS-API\\SS-API\\SS-API.csproj",
+        "projectUniqueName": "C:\\Streamer\\SS-API\\SS-API\\SS-API.csproj",
         "projectName": "SS-API",
-        "projectPath": "C:\\Users\\sabio\\Documents\\SS-API\\SS-API\\SS-API.csproj",
-        "packagesPath": "C:\\Users\\sabio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sabio\\Documents\\SS-API\\SS-API\\obj\\",
+        "projectPath": "C:\\Streamer\\SS-API\\SS-API\\SS-API.csproj",
+        "packagesPath": "C:\\Users\\vinic\\.nuget\\packages\\",
+        "outputPath": "C:\\Streamer\\SS-API\\SS-API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\sabio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +45,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.6, )"
@@ -88,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
