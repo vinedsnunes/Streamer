@@ -1,0 +1,37 @@
+<div class="container">
+
+  <h2>Create Project</h2>
+
+
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 m-auto">
+        <label class="mt-2">Name</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Name">
+
+        <label class="mt-2">Why</label>
+        <input type="text" class="form-control" formControlName="why" placeholder="Why">
+
+        <label class="mt-2">What</label>
+        <input type="text" class="form-control" formControlName="what" placeholder="What">
+
+        <label class="mt-2">What Will We Do</label>
+        <input type="text" class="form-control" formControlName="whatWillWeDo" placeholder="What Will We Do">
+
+        <label class="mt-2">Course</label>
+        <ngx-select-dropdown tabindex="0" (change)="changeCourse($event)" [config]="configSelect_1"
+          [options]="courseList" [multiple]="false" value="0">
+        </ngx-select-dropdown>
+
+        <label class="mt-2">Project Status</label>
+        <ngx-select-dropdown tabindex="0" (change)="changeProjectStatus($event)" [config]="configSelect"
+          [options]="projectStatusList" [multiple]="false" value="0">
+        </ngx-select-dropdown>
+
+        <button type="submit" class="btn btn-outline-primary my-3">Save</button>
+        <a [routerLink]="['']" routerLinkActive="router-link-active"  class="btn btn-outline-danger my-3 mx-2">Back</a>
+
+      </div>
+    </div>
+  </form>
+</div>

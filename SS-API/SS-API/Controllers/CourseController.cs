@@ -40,22 +40,6 @@ namespace SS_API.Controllers
             }
         }
 
-        [HttpGet("GetByCourseId/{id}")]
-        public async Task<IActionResult> GetByCourseId(int id)
-        {
-            try
-            {
-                Course result = await _courseService.GetByCourseId(id);
-                Course model = Mapper.Map<Course>(result);
-
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error: ", ex);
-            }
-        }
-
         [HttpPost("CreateCourse")]
         public async Task<IActionResult> CreateCourse([FromBody] Course model)
         {

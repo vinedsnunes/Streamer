@@ -24,8 +24,7 @@ namespace SS_API.Controllers
             Mapper = mapper;
             _projectService = projectService;
         }
-
-        [HttpGet("GetByIdProject")]
+        [HttpGet("GetByIdProject/{id}")]
         public async Task<IActionResult> GetByIdProject(int id)
         {
             try

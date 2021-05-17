@@ -32,7 +32,6 @@ namespace SS_API.Services
                 .AsNoTracking()
                 .ToListAsync();
         }
-
         public async Task<Course> GetByCourseId(int id)
         {
             try
